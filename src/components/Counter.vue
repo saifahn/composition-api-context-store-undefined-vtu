@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 export default defineComponent ({
-  setup() {
-    const count = ref(0);
+  setup(props, context) {
+    const count = computed(() => context.root.$store.state.count);
     function increaseCount() {
-      count.value += 1;
+      context.root.$store.commit('increment')
     }
     return { count, increaseCount }
   }
